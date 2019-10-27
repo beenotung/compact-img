@@ -2,6 +2,7 @@ import { HttpException, Param, Controller, Get, Body, Post, UploadedFile, UseInt
 import { File } from './type';
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
+import * as open from 'open';
 
 @Controller()
 export class AppController {
@@ -66,12 +67,27 @@ export class AppController {
     }
   }
 
+  @Post('open')
+  open(
+    @Body('dir')dir: string,
+  ) {
+    dir = dir || '.';
+    console.log('OPEN:', dir);
+    if (!existsSync(dir)) {
+      console.log('NOT EXIST:', dir);
+      throw new HttpException('dir not exist', 400);
+    } else {
+      open(dir);
+      return 'ok';
+    }
+  }
+
   @Post('close')
   close() {
     console.log('CLOSE');
     setTimeout(() => {
       process.exit(0);
-    }, 1000);
+    }, 500);
     return 'ok';
   }
 }

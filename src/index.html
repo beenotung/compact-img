@@ -14,6 +14,10 @@
     console.error('failed to load client.ts');
   }
 
+  function openDir() {
+    // to be replaced by client.ts
+  }
+
   function quit() {
     // to be replaced by client.ts
   }
@@ -41,7 +45,7 @@
   </tr>
   <tr>
     <td>
-      <label for="dir">Output Directory:</label>
+      <label for="dir">Output directory:</label>
     </td>
     <td>
       <input id="dir" type="text">
@@ -65,7 +69,8 @@
   </tr>
   <tr>
     <td colspan="2" style="text-align: center">
-      <button onclick="quit()">Close</button>
+      <button onclick="openDir()">Open output directory</button>
+      <button onclick="quit()" style="color: red">Close</button>
     </td>
   </tr>
   </tbody>
