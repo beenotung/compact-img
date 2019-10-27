@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+</head>
+<body>
+<script>
+  function handleInput(event) {
+    // to be replaced by client.ts
+    console.error('failed to load client.ts');
+  }
+
+  function quit() {
+    // to be replaced by client.ts
+  }
+</script>
+<table>
+  <tbody>
+  <tr>
+    <td>
+      <label for="size">Max output file size:</label>
+    </td>
+    <td>
+      <input id="size" type="number" min="0" value="300">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="unit">Size init:</label>
+    </td>
+    <td>
+      <select id="unit">
+        <option value="KB" selected>KB</option>
+        <option value="MB">MB</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="dir">Output Directory:</label>
+    </td>
+    <td>
+      <input id="dir" type="text">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="file">Input files:</label>
+    </td>
+    <td>
+      <input id="file" type="file" accept="image/*" multiple onchange="handleInput(event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="status">Status:</label>
+    </td>
+    <td>
+      <textarea id="status"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align: center">
+      <button onclick="quit()">Close</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<script src="client.ts"></script>
+</body>
+</html>
+
