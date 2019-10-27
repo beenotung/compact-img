@@ -1,8 +1,13 @@
-
 # compact-img
 Lossy compress images in batch
 
 [![npm Package Version](https://img.shields.io/npm/v/compact-img.svg?maxAge=2592000)](https://www.npmjs.com/package/compact-img)
+
+## Functions
+- auto rescale image to meet specified file size budget
+- auto save output files to specified directory
+- auto create output directory if needed
+- shortcut to open output directory in file explorer
 
 ## Installation
 
