@@ -48,5 +48,14 @@
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/compact-img.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/beenotung/compact-img/issues"
+  },
+  "homepage": "https://github.com/beenotung/compact-img#readme"
 }
