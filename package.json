@@ -1,6 +1,6 @@
 {
   "name": "compact-img",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Lossy compress images in batch",
   "author": "Beeno Tung <https://beeno-tung.surge.sh>",
   "license": "BSD-2-Clause",
