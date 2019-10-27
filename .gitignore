@@ -39,3 +39,4 @@ lerna-debug.log*
 .cache/
 out/
 public/
+*.tgz

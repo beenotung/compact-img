@@ -4,6 +4,9 @@
   "description": "Lossy compress images in batch",
   "author": "Beeno Tung <https://beeno-tung.surge.sh>",
   "license": "BSD-2-Clause",
+  "bin": {
+    "compact-img": "./compact-img"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "run-p build:*",
@@ -14,8 +17,13 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "tslint -p tsconfig.json -c tslint.json"
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist",
+    "compact-img"
+  ],
   "dependencies": {
     "@beenotung/tslib": "^14.38.4",
     "@nestjs/common": "^6.7.2",
