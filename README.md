@@ -1,8 +1,8 @@
+
 # compact-img
-
-## Description
-
 Lossy compress images in batch
+
+[![npm Package Version](https://img.shields.io/npm/v/compact-img.svg?maxAge=2592000)](https://www.npmjs.com/package/compact-img)
 
 ## Installation
 
