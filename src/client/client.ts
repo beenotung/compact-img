@@ -114,7 +114,7 @@ w.handleInput = (event: Event) => {
     reader.readAsDataURL(file);
   }
 };
-let callApi = (args: { url: string, doneMessage: string, action: string, body?: string }) =>
+let callApi = (args: { url: string, doneMessage: string, action: string, body?: string, close?: boolean }) =>
   fetch(args.url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -124,7 +124,9 @@ let callApi = (args: { url: string, doneMessage: string, action: string, body?: 
       if (200 <= res.status && res.status < 300) {
         console.log(args.doneMessage);
         statusTextarea.value = args.doneMessage;
-        window.close();
+        if (args.close) {
+          window.close();
+        }
         return;
       }
       res.json()
@@ -148,4 +150,5 @@ w.quit = () => callApi({
   url: '/close',
   doneMessage: 'server closed',
   action: 'close server',
+  close: true,
 });
