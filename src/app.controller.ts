@@ -2,6 +2,7 @@ import { HttpException, Param, Controller, Get, Body, Post, UploadedFile, UseInt
 import { File } from './type';
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
+import * as open from 'open';
 
 @Controller()
 export class AppController {
@@ -51,14 +52,33 @@ export class AppController {
     } else {
       console.log('GET:', requestFile, '~~>', file);
     }
-    let filepath = join('public', file);
+    let filepath = join(__dirname, '..', 'public', file);
     if (!existsSync(filepath)) {
+      console.log('NOT FOUND:', filepath);
       throw new HttpException('FILE NOT FOUND', 404);
     }
     try {
-      return readFileSync(filepath).toString();
+      let text = readFileSync(filepath).toString();
+      console.log('READ:', filepath);
+      return text;
     } catch (e) {
+      console.log('FAILED TO READ:', filepath);
       throw new HttpException('FAILED TO READ FILE', 500);
+    }
+  }
+
+  @Post('open')
+  open(
+    @Body('dir')dir: string,
+  ) {
+    dir = dir || '.';
+    console.log('OPEN:', dir);
+    if (!existsSync(dir)) {
+      console.log('NOT EXIST:', dir);
+      throw new HttpException('dir not exist', 400);
+    } else {
+      open(dir);
+      return 'ok';
     }
   }
 
@@ -67,7 +87,7 @@ export class AppController {
     console.log('CLOSE');
     setTimeout(() => {
       process.exit(0);
-    }, 1000);
+    }, 500);
     return 'ok';
   }
 }

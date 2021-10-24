@@ -4,10 +4,11 @@ canvas.style.display = 'none';
 document.body.append(canvas);
 let ctx = canvas.getContext('2d');
 let statusTextarea = document.getElementById('status') as HTMLTextAreaElement;
+let dirInput = document.getElementById('dir') as HTMLInputElement;
 w.handleInput = (event: Event) => {
   let maxSize = (document.getElementById('size') as HTMLInputElement).valueAsNumber;
   let sizeUnit = (document.getElementById('unit') as HTMLInputElement).value;
-  let dir = (document.getElementById('dir') as HTMLInputElement).value;
+  let dir = (dirInput).value;
   console.log('max size:', maxSize, sizeUnit);
   switch (sizeUnit) {
     case 'KB':
@@ -99,7 +100,7 @@ w.handleInput = (event: Event) => {
           })
           .then(() => {
             nDone++;
-            statusTextarea.textContent = `${nDone}/${files.length} (${Math.round(nDone / files.length * 100)}%)`;
+            statusTextarea.value = `${nDone}/${files.length} (${Math.round(nDone / files.length * 100)}%)`;
           })
         ;
         // let objectUrl = URL.createObjectURL(blob);
@@ -113,19 +114,38 @@ w.handleInput = (event: Event) => {
     reader.readAsDataURL(file);
   }
 };
-w.quit = () => {
-  fetch('/close', { method: 'POST' })
+let callApi = (args: { url: string, doneMessage: string, action: string, body?: string }) =>
+  fetch(args.url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: args.body,
+  })
     .then(res => {
       if (200 <= res.status && res.status < 300) {
-        console.log('server closed');
-        statusTextarea.textContent = 'server closed';
+        console.log(args.doneMessage);
+        statusTextarea.value = args.doneMessage;
         window.close();
         return;
       }
-      console.error('failed to close server, Reason:', res.statusText);
+      res.json()
+        .then(x => x.message)
+        .catch(() => res.statusText)
+        .then(msg => statusTextarea.value = msg)
+      ;
     })
     .catch(e => {
       console.error('failed to connect to server, Error:', e);
+      statusTextarea.value = `failed to connect to server, ${e.toString()}`;
     })
-  ;
-};
+;
+w.openDir = () => callApi({
+  url: '/open',
+  doneMessage: 'opened output directory',
+  action: 'open output directory',
+  body: JSON.stringify({ dir: dirInput.value }),
+});
+w.quit = () => callApi({
+  url: '/close',
+  doneMessage: 'server closed',
+  action: 'close server',
+});

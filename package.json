@@ -8,7 +8,7 @@
     "compact-img-web": "./compact-img-web"
   },
   "scripts": {
-    "prebuild": "rimraf dist build",
+    "prebuild": "rimraf dist",
     "build": "run-p build:*",
     "build:client": "snowpack build",
     "build:server": "tsc -p tsconfig.json",
@@ -22,6 +22,7 @@
   },
   "files": [
     "dist",
+    "public",
     "compact-img-web"
   ],
   "dependencies": {
