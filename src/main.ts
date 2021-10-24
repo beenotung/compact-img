@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { createServer } from 'net';
 import * as open from 'open';
-import * as bodyParser from 'body-parser';
+import * as express from 'express'
 
 async function getPort(): Promise<number> {
   return new Promise<number>((resolve, reject) => {
@@ -26,7 +26,7 @@ async function getPort(): Promise<number> {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(bodyParser.json({ limit: '100mb' }));
+  app.use(express.json({ limit: '100mb' }));
   let port = await getPort();
   await app.listen(port);
   let url = 'http://127.0.0.1:' + port;
