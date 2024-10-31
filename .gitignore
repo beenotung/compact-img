@@ -38,5 +38,5 @@ lerna-debug.log*
 # built files
 .cache/
 out/
-public/
+public/client.js
 *.tgz
