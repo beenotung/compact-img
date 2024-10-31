@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc -p . && cp dist/client.js public/",
+    "test": "tsc -p . && node dist/server.js test",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npm run build && ts-node-dev src/server.ts",
     "lint": "tslint -p tsconfig.json -c tslint.json",

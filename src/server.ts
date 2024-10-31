@@ -66,4 +66,6 @@ async function main() {
   await open(url)
 }
 
-main()
+if (process.argv[2] != 'test') {
+  main()
+}
